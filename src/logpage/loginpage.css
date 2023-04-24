@@ -1,0 +1,23 @@
+.container{
+   background-color: lightgray;
+  margin-top: 200px;
+  width: 100px;
+  margin-left: 600px;
+  padding: 100px;
+  border-radius: 15px;
+  
+}
+
+.text{
+   text-align: center;
+    color: azure;
+   margin-bottom: 30px;
+ 
+ 
+}
+
+.button{
+    
+    margin: auto !important;
+    margin-left: 10px !important;
+}

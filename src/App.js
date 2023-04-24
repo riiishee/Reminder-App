@@ -1,24 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import { app } from './firebase/firebase';
+import LoginPage from './logpage/LoginPage';
+import { useState, useEffect } from 'react';
+import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
+import Reminder from './Reminder/Reminder';
+
+
+
+
+const auth = getAuth(app)
 
 function App() {
+    const [user, setUser] = useState(null);
+
+useEffect(() => {
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+setUser(user);
+    }else {
+console.log("you are logged out");
+setUser(null)
+    }
+  })
+}, []);  
+
+if (user === null){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoginPage />
+  )
+}
+
+ return (
+<div>
+  <h1>
+  <Reminder />
+</h1>
+  <button  className='logout'  onClick={()=> signOut(auth)}>Logout</button>
+</div>
+   
+   
   );
 }
 
